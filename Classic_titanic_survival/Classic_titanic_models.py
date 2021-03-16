@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-os.chdir('C:\\Users\\kqll413\\Box Sync\\Data\\Hackathons\\Titanic')
+os.chdir('C:\Data\github\ML_projects\Classic_titanic_survival')
 
 df = pd.read_csv('titanic_train.csv')
 
@@ -22,12 +22,12 @@ df.isnull().sum()
 
 df.drop(['PassengerId','Name','Ticket','Cabin'],axis = 1,inplace = True)
 
-df = pd.get_dummies(df)
+df = pd.get_dummies(df,drop_first=True)
 
 df['Age'] = df['Age'].fillna(df['Age'].mode()[0])
 
 df_x = df.drop('Survived',axis = 1).values
-df_y = df['Survived'].values
+df_y = df['Survived'].values    
 
 from sklearn.model_selection import train_test_split
 X_train,X_test,Y_train,Y_test = train_test_split(df_x,df_y, test_size = 0.2)
